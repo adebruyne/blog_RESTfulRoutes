@@ -1,9 +1,8 @@
 var express = require("express"),
-  app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  methodOverride = require("method-override");
-
+  methodOverride = require("method-override"),
+  app = express();
 //APP CONFIG
 mongoose.connect("mongodb://localhost/Blog_RESTfulRoutes");
 app.set("view engine", "ejs");
@@ -87,7 +86,10 @@ app.get("/blogs/:id/edit", function(req, res) {
 
 //UPDATE
 app.put("blogs/:id", function(req, res) {
-  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
+  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(
+    err,
+    updatedBlog
+  ) {
     if (err) {
       res.redirect("/blogs");
     } else {
