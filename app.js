@@ -85,18 +85,32 @@ app.get("/blogs/:id/edit", function(req, res) {
 });
 
 //UPDATE
-app.put("blogs/:id", function(req, res) {
-  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(
-    err,
-    updatedBlog
-  ) {
-    if (err) {
+// app.put("blogs/:id", function(req, res) {
+//   Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(
+//     err,
+//     updatedBlog
+//   ) {
+//     if (err) {
+//       res.redirect("/blogs");
+//     } else {
+//       res.redirect("/blogs/" + req.params.id);
+//     }
+//   });
+// });
+
+//DELETE
+app.delete("/blogs/:id", function(req,res){
+  //destroy blog
+  Blog.findByIdAndRemove(req.params.id, function(err){
+    if(err){
+       res.redirect("/blogs");
+    } else{
       res.redirect("/blogs");
-    } else {
-      res.redirect("/blogs/" + req.params.id);
     }
-  });
-});
+  })
+
+})
+
 
 app.listen(8887, () => {
   console.log("The blog server has started!");
