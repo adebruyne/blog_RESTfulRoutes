@@ -3,10 +3,21 @@
     <div class="ui main text container segment">
         <div class="ui huge header">New Blog</div>
         <form action="/blogs" method="POST">
-            <input type="text" name="blog[title]" placeholder="title">
-            <input type="text" name="blog[image]" placeholder="image">
-            <input type="text" name="blog[body]" placeholder="Blog post goes here">
-            <input type="submit">
+            <div class="field">
+                <label>Title</label>
+                <input type="text" name="blog[title]" placeholder="title">
+            </div>
+            <div class="field">
+                <label>Image</label>
+                <input type="text" name="blog[image]" placeholder="image">
+            </div>
+            <div class="field">
+                <label>Blog Content</label>
+                <textarea name="blog[body]"></textarea>
+            </div>
+
+
+            <input class="ui violet basic button" type="submit">
         </form>
     </div>
     <% include ./partials/footer %>
