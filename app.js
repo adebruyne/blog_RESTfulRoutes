@@ -10,6 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 
 // MONGOOSE/MODEL CONFIG
 var blogSchema = new mongoose.Schema({
@@ -53,6 +54,7 @@ app.get("/blogs/new", function(req, res) {
 //CREATE
 app.post("/blogs", function(req, res) {
   //create blog
+  req.body.blog.body = req.sanitize(req.body.blog.body) //this prevents scripts tags from coming through
   Blog.create(req.body.blog, function(err, newBlog) {
     if (err) {
       res.render("new");
