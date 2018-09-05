@@ -2,6 +2,7 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override"),
+  expressSanitizer = require("express-sanitizer"),
   app = express();
 //APP CONFIG
 mongoose.connect("mongodb://localhost/Blog_RESTfulRoutes");
@@ -99,18 +100,16 @@ app.get("/blogs/:id/edit", function(req, res) {
 // });
 
 //DELETE
-app.delete("/blogs/:id", function(req,res){
+app.delete("/blogs/:id", function(req, res) {
   //destroy blog
-  Blog.findByIdAndRemove(req.params.id, function(err){
-    if(err){
-       res.redirect("/blogs");
-    } else{
+  Blog.findByIdAndRemove(req.params.id, function(err) {
+    if (err) {
+      res.redirect("/blogs");
+    } else {
       res.redirect("/blogs");
     }
-  })
-
-})
-
+  });
+});
 
 app.listen(8887, () => {
   console.log("The blog server has started!");
